@@ -1,6 +1,13 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Welcome from '@/Components/Welcome.vue';
+import MovieCard from '../../Components/Customs/MovieCard.vue';
+
+const props = defineProps({
+    movies: Object,
+});
+
+console.log(props.movies.data)
 </script>
 
 <template>
@@ -14,9 +21,22 @@ import Welcome from '@/Components/Welcome.vue';
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                   movies
+                  <div class=" grid grid-cols-3 gap-4 p-10">
+
+
+                   <MovieCard v-for="item in movies.data"
+                   :title="item.title"
+                   type="adulte"
+                   :image="item.poster_path"
+                   vote_count="10"
+
+                   />
+
+                  </div>
                 </div>
             </div>
         </div>
     </AppLayout>
 </template>
+
+

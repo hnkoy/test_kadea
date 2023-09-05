@@ -2,17 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Movie\MovieContract;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class MovieController extends Controller
 {
+
+    protected MovieContract $movieContract;
+
+    public function __construct(MovieContract $_movieContract)
+    {
+        $this->movieContract = $_movieContract;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Inertia::render('Movie/Index');
+        $movies=$this->movieContract->toGetAll();
+        return Inertia::render('Movie/Index', [
+            'movies' => $movies,
+
+        ]);
     }
 
     /**
