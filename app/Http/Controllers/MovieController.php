@@ -49,6 +49,12 @@ class MovieController extends Controller
     public function show(string $id)
     {
         //
+        $movie=$this->movieContract->toGetById($id);
+        return Inertia::render('Movie/Detail', [
+            'movie' => $movie,
+
+        ]);
+
     }
 
     /**

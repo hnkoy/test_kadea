@@ -14,7 +14,7 @@ console.log(props.movies.data)
     <AppLayout title="Dashboard">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Movies
+                liste des derniers films tendances de la journée
             </h2>
         </template>
 
@@ -26,9 +26,10 @@ console.log(props.movies.data)
 
                    <MovieCard v-for="item in movies.data"
                    :title="item.title"
-                   type="adulte"
+                   :type="item.adult?'adulte':'standard'"
                    :image="item.poster_path"
-                   vote_count="10"
+                   :vote_count="item.vote_count"
+                   :id="item.id"
 
                    />
 

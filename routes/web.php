@@ -37,3 +37,5 @@ Route::middleware([
 
 Route::get('movies', [MovieController::class, 'index'])
                 ->name('movies');
+Route::get('movie/detail/{id}', [MovieController::class, 'show'])
+                ->name('movie.show');
