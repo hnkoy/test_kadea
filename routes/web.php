@@ -39,3 +39,7 @@ Route::get('movies', [MovieController::class, 'index'])
                 ->name('movies');
 Route::get('movie/detail/{id}', [MovieController::class, 'show'])
                 ->name('movie.show');
+ Route::get('movies/create', [MovieController::class, 'create']) ->name('movies.create');
+ Route::post('movies/store', [MovieController::class, 'store'])->name('movie.store');
+ Route::get('movie/delete/{id}', [MovieController::class, 'destroy']) ->name('movie.destroy');
+

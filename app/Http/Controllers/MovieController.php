@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\CreateMovieRequest;
 use App\Repositories\Movie\MovieContract;
 use App\Utils\TmdbTool;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Validator;
 
 
 class MovieController extends Controller
@@ -37,17 +39,24 @@ class MovieController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Movie/CreateForm');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateMovieRequest $request)
     {
         //
+
+
         $input = $request->all();
+
+
+        $input[ 'id' ] = rand();
         $this->movieContract->toAdd( $input );
+
+        return redirect()->route('movies')->with('message', 'movie Created Successfully');
     }
 
     /**
@@ -77,7 +86,8 @@ class MovieController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $input = $request->all();
+        $user = $this->movieContract->toUpdate( $input, $id );
     }
 
     /**
@@ -85,7 +95,13 @@ class MovieController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $item = $this->movieContract->toGetById( $id );
+        if ( empty( $item ) ) {
+            return redirect()->route('movies')->with('message', 'not found');
+        }
+        $user = $this->movieContract->toDelete( $id );
+
+        return redirect()->route('movies')->with('message', 'succefully deleted ');
     }
 
     public function importData($totalPages=10)

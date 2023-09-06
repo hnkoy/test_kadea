@@ -26,6 +26,13 @@ defineProps({
 
         </div>
 
+        <div class="flex justify-between text-sm text-red-400 mt-2">
+            <Link>Edit</Link>
+            <span></span>
+            <Link :href="'/movie/delete/'+id">Delete</Link>
+
+        </div>
+
         </div>
 
 
