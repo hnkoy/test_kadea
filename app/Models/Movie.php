@@ -5,27 +5,32 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Movie extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'poster_path',
+        'id',
         'adult',
-        'release_date',
-        'original_title',
-        'original_language',
-        'title',
         'backdrop_path',
+        'name',
+        'original_language',
+        'original_name',
+        'overview',
+        'poster_path',
+        'media_type',
         'popularity',
-        'vote_count',
+        'first_air_date',
         'vote_average',
-        'video',
+        'vote_count',
+        'origin_country',
+        'genre_ids'
+
     ];
 
-    public function genreIds(): HasMany
-    {
-        return $this->hasMany(GenreId::class);
-    }
+
+
+
 }

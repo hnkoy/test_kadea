@@ -25,7 +25,7 @@ console.log(props.movies.data)
 
 
                    <MovieCard v-for="item in movies.data"
-                   :title="item.title"
+                   :title="item.name"
                    :type="item.adult?'adulte':'standard'"
                    :image="item.poster_path"
                    :vote_count="item.vote_count"

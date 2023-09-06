@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Repositories\Movie\MovieContract;
+use App\Utils\TmdbTool;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+
 
 class MovieController extends Controller
 {
 
     protected MovieContract $movieContract;
+    protected TmdbTool $tmdbTool;
 
-    public function __construct(MovieContract $_movieContract)
+    public function __construct(MovieContract $_movieContract,TmdbTool $_tmdbTool)
     {
         $this->movieContract = $_movieContract;
+        $this->tmdbTool = $_tmdbTool;
     }
     /**
      * Display a listing of the resource.
@@ -41,6 +46,8 @@ class MovieController extends Controller
     public function store(Request $request)
     {
         //
+        $input = $request->all();
+        $this->movieContract->toAdd( $input );
     }
 
     /**
@@ -80,4 +87,15 @@ class MovieController extends Controller
     {
         //
     }
+
+    public function importData($totalPages=10)
+    {
+        $this->tmdbTool->FetchImport();
+
+    }
+
+
+
+
+
 }

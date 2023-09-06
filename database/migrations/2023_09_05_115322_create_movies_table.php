@@ -12,18 +12,22 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('movies', function (Blueprint $table) {
-            $table->id();
-            $table->string('poster_path');
+            $table->unsignedBigInteger('id')->primary();
+
             $table->boolean('adult')->default(false);
-            $table->string('release_date');
-            $table->string('original_title');
-            $table->string('original_language');
-            $table->string('title');
-            $table->string('backdrop_path');
-            $table->string('popularity');
-            $table->string('vote_count');
-            $table->string('vote_average');
-            $table->boolean('video')->default(false);
+            $table->string('backdrop_path')->nullable();
+            $table->string('name')->nullable();
+            $table->string('original_language')->nullable();
+            $table->string('original_name')->nullable();
+            $table->text('overview')->nullable();
+            $table->string('poster_path')->nullable();
+            $table->string('media_type')->nullable();
+            $table->integer('popularity')->nullable();
+            $table->string('first_air_date')->nullable();
+            $table->integer('vote_average')->default(0);
+            $table->integer('vote_count')->default(0);
+            $table->json('genre_ids')->nullable();
+            $table->json('origin_country')->nullable();
 
             $table->timestamps();
         });

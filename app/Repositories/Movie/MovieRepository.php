@@ -9,10 +9,11 @@ class MovieRepository implements MovieContract {
 
 	/**
 	 * @param array $inputs
-	 * @return \Illuminate\Database\Eloquent\Model
 	 */
-	public function toAdd(array $inputs): Model {
-        $movie = Movie::create( $inputs );
+	public function toAdd( $inputs) {
+        $primaryKey = ['id'];
+        $movie = Movie::upsert($inputs, $primaryKey);
+
         return $movie;
 	}
 
@@ -51,7 +52,7 @@ class MovieRepository implements MovieContract {
 	 */
 	public function toGetAll($n = 50): mixed
     {
-        $movies = Movie::with('genreIds')->paginate( $n );
+        $movies = Movie::paginate( $n );
 
         return $movies;
 	}
@@ -62,8 +63,7 @@ class MovieRepository implements MovieContract {
 	 * @return Model|null
 	 */
 	public function toGetById($id): Model|null {
-        $movie = Movie::with('genreIds')
-        ->where('id',$id)
+        $movie = Movie::where('id',$id)
         ->first();
         return $movie;
 	}

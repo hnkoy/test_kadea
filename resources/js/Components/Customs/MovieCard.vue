@@ -12,7 +12,7 @@ defineProps({
 
 <template>
     <Link :href="'movie/detail/'+id" class=" rounded-md border">
-        <img :src="image" alt="" class=" rounded-md">
+        <img :src="'https://image.tmdb.org/t/p/w400/'+image" alt="" class=" rounded-md">
         <div class="p-5">
 
             <div class="mt-4">

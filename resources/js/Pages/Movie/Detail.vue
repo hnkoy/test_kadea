@@ -13,7 +13,7 @@ const props = defineProps({
     <AppLayout title="Dashboard">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-              Film: {{ movie.original_title }}
+              Film: {{ movie.original_name }}
             </h2>
         </template>
 
@@ -24,11 +24,11 @@ const props = defineProps({
 
 
                   <div class=" col-span-2">
-                    <img :src="movie.poster_path" alt="">
+                    <img :src="'https://image.tmdb.org/t/p/w400/'+movie.poster_path" alt="">
                   </div>
                   <div class=" col-span-3 flex-col">
                     <div class=" text-2xl font-bold mb-5">
-                        <span>{{ movie.title }}</span>
+                        <span>{{ movie.name }}</span>
                     </div>
 
                     <div class="flex">
