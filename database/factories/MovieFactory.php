@@ -17,6 +17,7 @@ class MovieFactory extends Factory
     public function definition(): array
     {
         return [
+            'id'=> rand(),
             'poster_path'=>fake()->imageUrl(),
             'adult' => fake()->numberBetween(0, 1),
             'first_air_date'=>fake()->date(),
