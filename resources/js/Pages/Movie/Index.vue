@@ -2,7 +2,7 @@
 import AppLayout from '@/Layouts/AppLayout.vue';
 import Welcome from '@/Components/Welcome.vue';
 import MovieCard from '../../Components/Customs/MovieCard.vue';
-import PrimaryButton from '../../Components/PrimaryButton.vue';
+import LinkButton from '../../Components/LinkButton.vue';
 import CustomButton from '../../Components/CustomButton.vue';
 import { useForm } from '@inertiajs/vue3';
 import Pagination from '../../Components/Pagination.vue';
@@ -43,7 +43,7 @@ const handlesubmit = () => {
                         </span>
                     </div>
                     <div class="flex justify-end p-5">
-                        <PrimaryButton link="/movies/create"> Nouveau</PrimaryButton>
+                        <LinkButton link="/movies/create"> Nouveau</LinkButton>
 
                     </div>
                     <form  @submit.prevent="handlesubmit">
