@@ -27,7 +27,6 @@ class MovieFactory extends Factory
             'popularity'=>fake()->numberBetween(10, 1000),
             'vote_count'=>fake()->numberBetween(0, 100),
             'vote_average'=>fake()->numberBetween(0, 100),
-            'video' => fake()->numberBetween(0, 1),
             'overview'=>fake()->text(300),
             'media_type'=>fake()->text(30),
         ];
