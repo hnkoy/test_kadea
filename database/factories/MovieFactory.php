@@ -19,15 +19,17 @@ class MovieFactory extends Factory
         return [
             'poster_path'=>fake()->imageUrl(),
             'adult' => fake()->numberBetween(0, 1),
-            'release_date'=>fake()->date(),
-            'original_title'=>fake()->text(30),
+            'first_air_date'=>fake()->date(),
+            'original_name'=>fake()->text(30),
             'original_language'=>fake()->languageCode(),
-            'title'=>fake()->text(30),
+            'name'=>fake()->text(30),
             'backdrop_path'=>fake()->imageUrl(),
             'popularity'=>fake()->numberBetween(10, 1000),
             'vote_count'=>fake()->numberBetween(0, 100),
             'vote_average'=>fake()->numberBetween(0, 100),
             'video' => fake()->numberBetween(0, 1),
+            'overview'=>fake()->text(300),
+            'media_type'=>fake()->text(30),
         ];
     }
 }
