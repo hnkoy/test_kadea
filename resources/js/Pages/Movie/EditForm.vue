@@ -8,28 +8,27 @@ import { Link } from '@inertiajs/vue3';
 import { useForm } from '@inertiajs/vue3';
 
 const props = defineProps({
-    movies: Object,
+    movie:Object
 });
 
 const form = useForm({
-    id: '',
-
-    backdrop_path: '',
-    name: '',
-    original_language: '',
-    original_name: '',
-    overview: '',
-    poster_path: '',
-    media_type: '',
-    popularity: '',
-    first_air_date: '',
-    vote_average: '',
-    vote_count: '',
+    id: props.movie.id,
+    backdrop_path: props.movie.backdrop_path,
+    name: props.movie.name,
+    original_language: props.movie.original_language,
+    original_name:  props.movie.original_name,
+    overview: props.movie.overview,
+    poster_path: props.movie.poster_path,
+    media_type: props.movie.media_type,
+    popularity: props.movie.popularity,
+    first_air_date:  props.movie.first_air_date,
+    vote_average:  props.movie.vote_average,
+    vote_count:  props.movie.vote_count,
 
 });
 
 const handlesubmit = () => {
-    form.post(route("movie.store"));
+    form.post(route("movie.update"));
 };
 </script>
 
@@ -44,7 +43,7 @@ const handlesubmit = () => {
                     <form @submit.prevent="handlesubmit">
                         <div class="space-y-12">
                             <div class="border-b border-gray-900/10 pb-12">
-                                <h2 class="text-base font-semibold leading-7 text-gray-900">Film</h2>
+                                <h2 class="text-base font-semibold leading-7 text-gray-900">Update Film</h2>
 
 
                                 <div class="border-b border-gray-900/10 pb-12">
@@ -55,7 +54,8 @@ const handlesubmit = () => {
                                             <label for="first-name"
                                                 class="block text-sm font-medium leading-6 text-gray-900">Titre</label>
                                             <div class="mt-2">
-                                                <input type="text" v-model="form.name" name="name" id="name"
+                                                <input type="hidden" v-model="form.id"  name="id" id="id"/>
+                                                <input type="text" v-model="form.name"  name="name" id="name"
                                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
 
                                                 <div v-if="form.errors.name" class="text-sm text-red-600">
@@ -88,12 +88,8 @@ const handlesubmit = () => {
                                             <label for="media_type"
                                                 class="block text-sm font-medium leading-6 text-gray-900">media_type</label>
                                             <div class="mt-2">
-                                                <select id="media_type" v-model="form.media_type" name="media_type"
-                                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                                                    <option>United States</option>
-                                                    <option>Canada</option>
-                                                    <option>Mexico</option>
-                                                </select>
+                                                <input type="text"  class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"   v-model="form.media_type" name="media_type">
+
                                             </div>
                                         </div>
 

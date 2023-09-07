@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateMovieRequest;
 use App\Repositories\Movie\MovieContract;
+use App\Utils\FileUpload;
 use App\Utils\TmdbTool;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -15,12 +16,12 @@ class MovieController extends Controller
 {
 
     protected MovieContract $movieContract;
-    protected TmdbTool $tmdbTool;
+    protected FileUpload $fileUpload;
 
-    public function __construct(MovieContract $_movieContract,TmdbTool $_tmdbTool)
+    public function __construct(MovieContract $_movieContract,FileUpload $_fileUpload)
     {
         $this->movieContract = $_movieContract;
-        $this->tmdbTool = $_tmdbTool;
+        $this->fileUpload = $_fileUpload;
     }
     /**
      * Display a listing of the resource.
@@ -28,6 +29,18 @@ class MovieController extends Controller
     public function index()
     {
         $movies=$this->movieContract->toGetAll();
+        return Inertia::render('Movie/Index', [
+            'movies' => $movies,
+
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function getByName(Request $request)
+    {
+        $movies=$this->movieContract->toGetMovieByName($request->name);
         return Inertia::render('Movie/Index', [
             'movies' => $movies,
 
@@ -54,6 +67,15 @@ class MovieController extends Controller
 
 
         $input[ 'id' ] = rand();
+        if ($request->file('backdrop_path') != null) {
+            $input[ 'backdrop_path' ] =$this->fileUpload->upload($request->file('backdrop_path')) ;
+        }
+
+        if ($request->file('poster_path') != null) {
+            $input[ 'poster_path' ] = $this->fileUpload->upload($request->file('poster_path'));
+        }
+
+
         $this->movieContract->toAdd( $input );
 
         return redirect()->route('movies')->with('message', 'movie Created Successfully');
@@ -78,16 +100,21 @@ class MovieController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $movie=$this->movieContract->toGetById($id);
+        return Inertia::render('Movie/EditForm', [
+            'movie' => $movie,
+
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CreateMovieRequest $request)
     {
         $input = $request->all();
-        $user = $this->movieContract->toUpdate( $input, $id );
+        $user = $this->movieContract->toUpdate( $input, $request->id );
+        return redirect()->route('movies')->with('message', 'movie update Successfully');
     }
 
     /**
@@ -104,11 +131,7 @@ class MovieController extends Controller
         return redirect()->route('movies')->with('message', 'succefully deleted ');
     }
 
-    public function importData($totalPages=10)
-    {
-        $this->tmdbTool->FetchImport();
 
-    }
 
 
 

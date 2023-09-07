@@ -33,7 +33,7 @@ class TmdbTool  {
         'original_language'=>array_key_exists('original_language', $item)?$item['original_language']:null,
         'original_name'=>array_key_exists('original_name', $item)?$item['original_name']:$item['original_title'],
         'overview'=>array_key_exists('overview', $item)?$item['overview']:null,
-        'poster_path'=>array_key_exists('poster_path', $item)?$item['poster_path']:null,
+        'poster_path'=>array_key_exists('poster_path', $item)?env('TMDB_IMG_BASE_URL').$item['poster_path']:null,
         'media_type'=>array_key_exists('media_type', $item)?$item['media_type']:null,
         'popularity'=>array_key_exists('popularity', $item)?$item['popularity']:0,
         'first_air_date'=>array_key_exists('first_air_date', $item)?$item['first_air_date']:$item['release_date']??null,

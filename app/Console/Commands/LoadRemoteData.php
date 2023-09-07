@@ -35,12 +35,11 @@ class LoadRemoteData extends Command
 
     public function handle()
     {
-       if ($this->confirm('Are sure?')) {
 
 
             $totalPage = $this->argument('totalPage');
 
             $this->tmdb->FetchImport((int)$totalPage);
-        }
+
     }
 }

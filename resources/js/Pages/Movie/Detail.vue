@@ -24,7 +24,7 @@ const props = defineProps({
 
 
                   <div class=" col-span-2">
-                    <img :src="'https://image.tmdb.org/t/p/w400/'+movie.poster_path" alt="">
+                    <img :src="movie.poster_path" alt="">
                   </div>
                   <div class=" col-span-3 flex-col">
                     <div class=" text-2xl font-bold mb-5">
@@ -42,6 +42,11 @@ const props = defineProps({
                         <span>popularité: {{ movie.popularity }}</span>
                         <span class=" ml-10 font-bold">Votes: {{ movie.vote_count }}</span>
                     </div>
+
+                    <p class="mt-10 text-sm">
+                        {{ movie.overview }}
+
+                    </p>
 
 
                   </div>

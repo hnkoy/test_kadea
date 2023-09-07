@@ -4,15 +4,15 @@ import { Link } from '@inertiajs/vue3'
 defineProps({
         title: String,
         image: String,
-        vote_count: String,
+        vote_count: Number,
         type: String,
-        id:String
+        id:Number
 });
 </script>
 
 <template>
-    <Link :href="'movie/detail/'+id" class=" rounded-md border">
-        <img :src="'https://image.tmdb.org/t/p/w400/'+image" alt="" class=" rounded-md">
+    <Link :href="'/movie/detail/'+id" class=" rounded-md border">
+        <img :src="image" alt="" class=" rounded-md">
         <div class="p-5">
 
             <div class="mt-4">
@@ -27,7 +27,7 @@ defineProps({
         </div>
 
         <div class="flex justify-between text-sm text-red-400 mt-2">
-            <Link>Edit</Link>
+            <Link :href="'/movie/edit/'+id">Edit</Link>
             <span></span>
             <Link :href="'/movie/delete/'+id">Delete</Link>
 

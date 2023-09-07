@@ -35,11 +35,13 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('movies', [MovieController::class, 'index'])
-                ->name('movies');
-Route::get('movie/detail/{id}', [MovieController::class, 'show'])
-                ->name('movie.show');
+Route::get('movies', [MovieController::class, 'index'])->name('movies');
+Route::get('movie/detail/{id}', [MovieController::class, 'show'])->name('movie.show');
  Route::get('movies/create', [MovieController::class, 'create']) ->name('movies.create');
  Route::post('movies/store', [MovieController::class, 'store'])->name('movie.store');
  Route::get('movie/delete/{id}', [MovieController::class, 'destroy']) ->name('movie.destroy');
+ Route::get('movie/edit/{id}', [MovieController::class, 'edit']) ->name('movie.edit');
+
+ Route::post('movie/update', [MovieController::class, 'update']) ->name('movie.update');
+ Route::get('movies/getByName', [MovieController::class, 'getByName'])->name('movies.getByName');
 

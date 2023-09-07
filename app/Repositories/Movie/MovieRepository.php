@@ -68,5 +68,16 @@ class MovieRepository implements MovieContract {
         return $movie;
 	}
 
+    /**
+	 *
+	 * @param mixed $name
+	 */
+	public function toGetMovieByName($name) {
+        $movies = Movie::where('name','LIKE','%'.$name.'%')
+
+        ->paginate();
+        return $movies;
+	}
+
 
 }
