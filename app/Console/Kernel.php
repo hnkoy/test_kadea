@@ -12,7 +12,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+         $schedule->command('tmdb:load-remote-data 500')->everyMinute()
+         ->sendOutputTo("scheduler-output.log");
     }
 
     /**
